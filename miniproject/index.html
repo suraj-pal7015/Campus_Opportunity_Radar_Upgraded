@@ -1,0 +1,317 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Campus Opportunity Radar</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <header class="navbar">
+        <a href="#" class="logo">
+            <span class="logo-icon">⌁</span>
+            Campus<span class="highlight">Radar</span>
+        </a>
+
+        <nav>
+            <a href="#opportunities">Explore</a>
+            <a href="#deadlines">Deadlines</a>
+            <a href="#checklist">Checklist</a>
+        </nav>
+
+        <button id="savedButton" class="saved-button">
+            ★ Saved <span id="savedCount">0</span>
+        </button>
+    </header>
+
+
+    <main>
+
+        <!-- Hero Section -->
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <p class="eyebrow">
+                    YOUR NEXT OPPORTUNITY STARTS HERE
+                </p>
+
+                <h1>
+                    Find Your Next
+                    <span>Big Opportunity.</span>
+                </h1>
+
+                <p>
+                    Discover hackathons, coding competitions,
+                    workshops, and internships in one place.
+                    Build skills and grow your career.
+                </p>
+
+                <a href="#opportunities" class="primary-button">
+                    Explore Opportunities →
+                </a>
+
+                <div class="hero-note">
+                    ✓ Save opportunities · Track deadlines · Learn new skills
+                </div>
+
+            </div>
+
+            <div class="hero-visual">
+                <div class="radar-circle circle-one"></div>
+                <div class="radar-circle circle-two"></div>
+                <div class="radar-circle circle-three"></div>
+
+                <div class="radar-center">⌁</div>
+
+                <span class="floating-label label-one">
+                    HACKATHONS
+                </span>
+
+                <span class="floating-label label-two">
+                    INTERNSHIPS
+                </span>
+
+                <span class="floating-label label-three">
+                    YOUR FUTURE
+                </span>
+            </div>
+
+        </section>
+
+
+        <!-- Dashboard Statistics -->
+        <section class="statistics">
+
+            <div class="stat-card">
+                <div class="stat-icon purple">✦</div>
+                <div>
+                    <h2 id="totalCount">0</h2>
+                    <p>Opportunities</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon orange">◷</div>
+                <div>
+                    <h2 id="upcomingCount">0</h2>
+                    <p>Upcoming Deadlines</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon green">★</div>
+                <div>
+                    <h2 id="bookmarkCount">0</h2>
+                    <p>Saved Opportunities</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon blue">✓</div>
+                <div>
+                    <h2 id="progressCount">0%</h2>
+                    <p>Checklist Progress</p>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- Opportunities Section -->
+        <section id="opportunities" class="section">
+
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">DISCOVER AND GROW</p>
+                    <h2>Explore Opportunities</h2>
+                    <p class="muted">
+                        Find opportunities matching your skills and interests.
+                    </p>
+                </div>
+
+                <button id="allButton" class="tab-button active">
+                    All Opportunities
+                </button>
+            </div>
+
+
+            <!-- Search and Filters -->
+            <div class="filter-panel">
+
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="Search opportunities or skills..."
+                    aria-label="Search opportunities"
+                >
+
+                <select id="categoryFilter" aria-label="Filter by category">
+                    <option value="all">All Categories</option>
+                    <option value="Hackathon">Hackathons</option>
+                    <option value="Competition">Coding Contests</option>
+                    <option value="Workshop">Workshops</option>
+                    <option value="Internship">Internships</option>
+                </select>
+
+                <select id="skillFilter" aria-label="Filter by skill">
+                    <option value="all">All Skills</option>
+                    <option value="Web Development">Web Development</option>
+                    <option value="Java">Java</option>
+                    <option value="Python">Python</option>
+                    <option value="AI/ML">AI/ML</option>
+                    <option value="Problem Solving">Problem Solving</option>
+                    <option value="Design">Design</option>
+                    <option value="Artificial Intelligence">Artificial Intelligence</option>
+                    <option value="Machine Learning">Machine Learning</option>
+                    <option value="C++">C++</option>
+                    <option value="Android Development">Android Development</option>
+                    <option value="JavaScript">JavaScript</option>
+                </select>
+
+                <select id="levelFilter" aria-label="Filter by level">
+                    <option value="all">All Levels</option>
+                    <option value="Beginner">Beginner</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Advanced">Advanced</option>
+                </select>
+
+                <button id="clearFilters" class="secondary-button">
+                    Clear Filters
+                </button>
+
+            </div>
+
+
+            <section class="personalization-panel" aria-labelledby="skillsHeading">
+                <div>
+                    <p class="eyebrow">PERSONALIZE YOUR RADAR</p>
+                    <h3 id="skillsHeading">Your skills</h3>
+                    <p class="muted">Enter skills separated by commas. Your Fit Score is a simple skill-overlap estimate, not an AI prediction.</p>
+                </div>
+                <div class="skills-entry-row">
+                    <input id="studentSkillsInput" type="text" placeholder="e.g. Java, HTML, CSS, Python" aria-label="Enter your skills">
+                    <button id="saveSkillsButton" class="secondary-button" type="button">Save My Skills</button>
+                </div>
+                <p id="skillsSavedMessage" class="muted" aria-live="polite"></p>
+            </section>
+
+            <!-- Results -->
+            <div class="results-heading">
+                <p id="resultsText">Showing opportunities</p>
+                <button id="showSaved" class="text-button">
+                    ★ Show Saved
+                </button>
+            </div>
+
+            <!-- JavaScript displays opportunity cards here -->
+            <div id="opportunityGrid" class="opportunity-grid"></div>
+
+            <div id="emptyState" class="empty-state hidden">
+                <h3>No opportunities found</h3>
+                <p>Try another keyword or change your filters.</p>
+            </div>
+
+            <p class="demo-note">
+                This project uses demonstration listings. Verify actual
+                opportunities and deadlines with the official organizers.
+            </p>
+
+        </section>
+
+
+        <!-- Deadline Tracker and Checklist -->
+        <section class="lower-section">
+
+            <!-- Deadline Tracker -->
+            <div id="deadlines" class="panel">
+
+                <p class="eyebrow">STAY ORGANIZED</p>
+                <h2>Deadline Radar</h2>
+
+                <p class="muted">
+                    Track deadlines for your saved opportunities.
+                </p>
+
+                <div id="deadlineList" class="deadline-list"></div>
+
+            </div>
+
+
+            <!-- Beginner Checklist -->
+            <div id="checklist" class="panel">
+
+                <p class="eyebrow">START YOUR JOURNEY</p>
+                <h2>Beginner Checklist</h2>
+
+                <p class="muted">
+                    Complete these steps to prepare for opportunities.
+                </p>
+
+                <div class="progress-track">
+                    <div id="progressBar" class="progress-bar"></div>
+                </div>
+
+                <p id="progressText" class="muted">
+                    0 of 5 completed
+                </p>
+
+                <div id="checklistItems"></div>
+
+                <button id="resetChecklist" class="secondary-button">
+                    Reset Checklist
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- Call to Action -->
+        <section class="cta-section">
+
+            <div>
+                <p class="eyebrow">BUILD YOUR FUTURE</p>
+                <h2>Stay Curious. Keep Applying.</h2>
+                <p>
+                    Explore opportunities, improve your skills,
+                    and take the next step in your career.
+                </p>
+            </div>
+
+            <a href="#opportunities" class="light-button">
+                Explore Now →
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer>
+        <a href="#" class="logo">
+            Campus<span class="highlight">Radar</span>
+        </a>
+
+        <p>Campus Opportunity Radar | Student Mini Project</p>
+
+        <a href="#opportunities">Back to Top ↑</a>
+    </footer>
+
+
+    <!-- Notification -->
+    <dialog id="opportunityDialog" class="opportunity-dialog">
+        <div id="opportunityDialogContent"></div>
+        <button type="button" id="closeOpportunityDialog" class="secondary-button">Close</button>
+    </dialog>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+</body>
+</html>
