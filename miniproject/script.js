@@ -103,7 +103,7 @@ const opportunities = [
 
         level: "All Levels",
 
-        deadline: "2026-11-20",
+        deadline: "2026-11-27",
 
         mode: "Offline (IIIT Lucknow)",
 
